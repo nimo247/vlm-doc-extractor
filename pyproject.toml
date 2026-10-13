@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evidencedoc"
+version = "0.1.0"
+description = "Grounded document parsing, VLM adaptation, and reproducible evaluation"
+requires-python = ">=3.10"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "python-multipart>=0.0.18", "pydantic>=2.9,<3", "PyMuPDF>=1.24,<2", "Pillow>=10,<13", "httpx[socks]>=0.27,<1", "PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "reportlab>=4,<5"]
+train = ["torch>=2.4", "transformers>=5.18,<6", "trl>=0.28,<2", "peft>=0.17,<1", "accelerate>=1", "bitsandbytes>=0.45", "datasets>=3"]
+docling = ["docling>=2,<3"]
+
+[project.scripts]
+evidencedoc = "evidencedoc.cli:main"
+
+[tool.setuptools.package-data]
+evidencedoc = ["static/*"]
+
+[tool.setuptools.packages.find]
+include = ["evidencedoc*", "scripts*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

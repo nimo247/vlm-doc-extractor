@@ -1,0 +1,215 @@
+{
+  "schema_version": "1.0",
+  "document_type": "invoice",
+  "pages": [
+    {
+      "index": 0,
+      "blocks": [
+        {
+          "id": "b0",
+          "type": "heading",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.06159090909090909,
+            "x1": 0.2229500198364258,
+            "y1": 0.09906363747336648
+          },
+          "text": "INVOICE",
+          "rows": [],
+          "level": 1
+        },
+        {
+          "id": "b1",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.11527273004705256,
+            "x1": 0.3277499771118164,
+            "y1": 0.1352581787109375
+          },
+          "text": "Vendor: Veridian Instruments",
+          "rows": [],
+          "level": 2
+        },
+        {
+          "id": "b2",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.1489090936834162,
+            "x1": 0.31218997955322264,
+            "y1": 0.16889454234730114
+          },
+          "text": "Invoice number: INV-00000",
+          "rows": [],
+          "level": 2
+        },
+        {
+          "id": "b3",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.18254545731977984,
+            "x1": 0.27442996978759765,
+            "y1": 0.20253090598366477
+          },
+          "text": "Issue date: 2026-10-01",
+          "rows": [],
+          "level": 2
+        },
+        {
+          "id": "b4",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.21618182095614347,
+            "x1": 0.1954300308227539,
+            "y1": 0.2361672696200284
+          },
+          "text": "Currency: INR",
+          "rows": [],
+          "level": 2
+        },
+        {
+          "id": "b5",
+          "type": "table",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.27274999445134945,
+            "x1": 0.3451787185668945,
+            "y1": 0.3417154485529119
+          },
+          "text": "",
+          "rows": [
+            [
+              "Description",
+              "Qty",
+              "Unit price",
+              "Amount"
+            ],
+            [
+              "Sensor modules",
+              "3",
+              "191.00",
+              "573.00"
+            ],
+            [
+              "Cable assemblies",
+              "2",
+              "152.00",
+              "304.00"
+            ]
+          ],
+          "level": 2
+        },
+        {
+          "id": "b6",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.3743636252663352,
+            "x1": 0.18549001693725586,
+            "y1": 0.3943490878018466
+          },
+          "text": "Total: 877.00",
+          "rows": [],
+          "level": 2
+        },
+        {
+          "id": "b7",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.40799998890269884,
+            "x1": 0.4222299575805664,
+            "y1": 0.4279854514382102
+          },
+          "text": "Payment terms: payable within 30 days.",
+          "rows": [],
+          "level": 2
+        },
+        {
+          "id": "b8",
+          "type": "paragraph",
+          "bbox": {
+            "x0": 0.06875,
+            "y0": 0.4416363525390625,
+            "x1": 0.5066899871826172,
+            "y1": 0.46162181507457384
+          },
+          "text": "Generated sample. No real customer information.",
+          "rows": [],
+          "level": 2
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "name": "vendor",
+      "value": "Veridian Instruments",
+      "evidence": [
+        {
+          "page_index": 0,
+          "block_id": "b1",
+          "quote": "Vendor: Veridian Instruments"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "name": "invoice_number",
+      "value": "INV-00000",
+      "evidence": [
+        {
+          "page_index": 0,
+          "block_id": "b2",
+          "quote": "Invoice number: INV-00000"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "name": "purchase_order_number",
+      "value": null,
+      "evidence": [],
+      "reason": "No explicit labeled value found"
+    },
+    {
+      "name": "issue_date",
+      "value": "2026-10-01",
+      "evidence": [
+        {
+          "page_index": 0,
+          "block_id": "b3",
+          "quote": "Issue date: 2026-10-01"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "name": "total",
+      "value": "877.00",
+      "evidence": [
+        {
+          "page_index": 0,
+          "block_id": "b6",
+          "quote": "Total: 877.00"
+        }
+      ],
+      "reason": null
+    },
+    {
+      "name": "currency",
+      "value": "INR",
+      "evidence": [
+        {
+          "page_index": 0,
+          "block_id": "b4",
+          "quote": "Currency: INR"
+        }
+      ],
+      "reason": null
+    }
+  ]
+}

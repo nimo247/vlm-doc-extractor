@@ -1,0 +1,14 @@
+{
+  "backend": "baseline",
+  "page_routes": [
+    "pdf-text"
+  ],
+  "model": null,
+  "page_count": 1,
+  "max_edge": 1600,
+  "preprocessing_ms": 8.56,
+  "parsing_ms": 0.86,
+  "total_ms": 9.43,
+  "fine_tuning_status": "not established by this client",
+  "evidence_check": "reference/quote consistency only; visual grounding needs labeled evaluation"
+}

@@ -1,0 +1,35 @@
+{
+  "audit": {
+    "records": 60,
+    "splits": {
+      "train": 40,
+      "validation": 10,
+      "test": 10
+    },
+    "status": "passed",
+    "checks": [
+      "unique IDs",
+      "group/source isolation",
+      "image hashes",
+      "schema and evidence references"
+    ]
+  },
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "config": {
+    "model": "Qwen/Qwen3-VL-2B-Instruct",
+    "manifest": "data/generated/manifest.jsonl",
+    "output_dir": "checkpoints/evidencedoc-qwen3vl-2b",
+    "max_pixels": 1048576,
+    "epochs": 1,
+    "learning_rate": 0.0001,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "logging_steps": 1,
+    "save_steps": 50,
+    "seed": 42,
+    "quantize": true
+  },
+  "status": "data/config validated; no model loaded or trained"
+}

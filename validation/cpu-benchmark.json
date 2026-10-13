@@ -1,0 +1,42 @@
+{
+  "backend": "baseline",
+  "resolution": 1600,
+  "requests": 5,
+  "concurrency": 1,
+  "warmup": 1,
+  "successful_requests": 5,
+  "failed_requests": 0,
+  "median_seconds": 0.05484320799996567,
+  "p95_seconds": 0.07073137599991242,
+  "pages_per_minute": 1044.449955349189,
+  "wall_seconds": 0.28723252700001467,
+  "peak_gpu_memory_bytes": null,
+  "gpu_memory_note": "Not observable from this HTTP client. Measure on the model server; nvidia-smi polling gives sampled process memory, not torch allocation peaks.",
+  "measurements": [
+    {
+      "seconds": 0.07073137599991242,
+      "pages": 1,
+      "ok": true
+    },
+    {
+      "seconds": 0.05886786599990046,
+      "pages": 1,
+      "ok": true
+    },
+    {
+      "seconds": 0.05484320799996567,
+      "pages": 1,
+      "ok": true
+    },
+    {
+      "seconds": 0.05227125800001886,
+      "pages": 1,
+      "ok": true
+    },
+    {
+      "seconds": 0.04977224000003844,
+      "pages": 1,
+      "ok": true
+    }
+  ]
+}
