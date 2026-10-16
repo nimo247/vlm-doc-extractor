@@ -1,0 +1,18 @@
+{
+  "changes": [
+    "Require compute capability >= 8 before selecting BF16",
+    "Use explicit standard loss_type=nll to bypass chunked loss",
+    "Promote only trainable adapter parameters to FP32 after SFTTrainer initialization; assert actual parameter dtypes"
+  ],
+  "validation": [
+    "Python syntax compiled",
+    "Training configuration dry-run passed",
+    "Standard loss opt-out checked against official TRL 1.9 docs",
+    "FP32 trainable weight policy checked against official PEFT guidance; updated syntax compiled"
+  ],
+  "gpu_training_verified": false,
+  "reported_failures": [
+    "TRL chunked_logprob backward requests unsupported BF16-to-FP32 GEMM on Tesla T4",
+    "BF16 gradients rejected by FP16 AMP gradient unscaler"
+  ]
+}

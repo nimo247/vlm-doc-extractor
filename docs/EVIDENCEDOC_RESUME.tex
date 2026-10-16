@@ -1,0 +1,9 @@
+% Insert inside your existing \resumeSubHeadingListStart environment.
+% Add your actual repository link after verifying it; none is invented here.
+\resumeProjectHeading
+    {\textbf{EvidenceDoc: Document VLM Fine-Tuning} $|$ \emph{PyTorch, Transformers, PEFT, FastAPI, Tesseract}}{Oct. 2026}
+    \resumeItemListStart
+      \resumeItem{Fine-tuned \textbf{Qwen3-VL-2B} with \textbf{4-bit LoRA} on 168 document pages, training \textbf{8.7M parameters (0.408\%)} on a Tesla T4 to extract typed fields, bounding boxes, and grouped line items.}
+      \resumeItem{Built a \textbf{group/source-separated evaluation pipeline} on 50 custom held-out pages; measured \textbf{34.9\% key-field text F1} and improved \textbf{line-item text-and-box F1 from 15.7\% to 23.0\%} through OCR box alignment, preserving failed outputs in evaluation.}
+      \resumeItem{Served the trained adapter through an \textbf{authenticated FastAPI GPU service} with asynchronous job polling, source-region inspection, manual review, and \textbf{JSON/Markdown exports}.}
+    \resumeItemListEnd

@@ -1,0 +1,9 @@
+{
+  "fix": "All multimodal message content uses typed lists; Arrow conversion happens before model weight loading.",
+  "verified": [
+    "CPU regression test preserves images and assistant JSON through Dataset.from_list",
+    "All 50 generated training/validation examples converted successfully",
+    "Original mixed-content ArrowInvalid reproduced"
+  ],
+  "gpu_training_completed": false
+}

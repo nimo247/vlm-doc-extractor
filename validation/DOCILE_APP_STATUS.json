@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-15",
+  "status": "User demonstrated live PDF extraction through Codespaces and Kaggle; semantic errors documented; frozen final 50-page test completed; results verified",
+  "cpu_tests": {
+    "full_suite_passed": 60,
+    "full_suite_skipped": 2,
+    "skip_reason": "optional datasets package unavailable",
+    "real_saved_documents_served": 40,
+    "real_schema_valid": 30,
+    "real_schema_invalid": 10,
+    "real_cpu_ocr_upload_schema_valid": true,
+    "backup_restore_verified_images": 40
+  },
+  "frontend_checks": {
+    "javascript_syntax": true,
+    "html_unique_ids": 48,
+    "all_literal_js_targets_present": true,
+    "dom_interactions_passed": [
+      "saved result provenance",
+      "field highlight rectangles",
+      "row groups",
+      "invalid output disables validated exports",
+      "manual review preserves page",
+      "text injection remains literal",
+      "JSON export",
+      "Markdown export",
+      "original raw output preserved after edits",
+      "keyboard tabs"
+    ],
+    "visual_browser_qa": false,
+    "visual_browser_qa_reason": "Chromium download failed; DOM checks do not verify rendered layout",
+    "job_polling_dom_test": true
+  },
+  "gpu_service": {
+    "implemented": true,
+    "auth_and_forwarding_contracts_mock_tested": true,
+    "actual_model_loading_or_generation_tested_by_builder": false,
+    "public_deployment_created": false,
+    "user_reported_single_page_api_smoke": {
+      "schema_valid": true,
+      "exit_code": 0,
+      "generated_tokens": 719,
+      "generation_seconds": 79.11216359799982,
+      "peak_allocated_gpu_bytes": 2473997312,
+      "adapter_sha256": "f0b44027a8727df30e4aafb0595973c4cfc3562bbe57e778c7288affefbf5265",
+      "processed_size": [
+        960,
+        1280
+      ],
+      "source": "User pasted Kaggle subprocess output; not independently executed by builder"
+    },
+    "user_reported_cross_machine_live_upload": {
+      "completed": true,
+      "schema_valid": true,
+      "displayed_request_minutes": 2.2,
+      "source": "Three user screenshots and the supplied unedited JSON/PDF",
+      "semantic_correctness": false,
+      "observed_failures": [
+        "misclassified address",
+        "incorrect quantities",
+        "mixed row amounts",
+        "missing identifiers and total",
+        "incorrect date region"
+      ]
+    },
+    "user_started_temporary_authenticated_tunnel": true
+  },
+  "scope": [
+    "CPU application can review saved outputs and perform fresh OCR extraction",
+    "Saved results are explicitly labeled and use recorded generation times",
+    "Manual edits stay in browser memory and never overwrite benchmark labels or predictions",
+    "GPU backend remains disabled unless explicitly configured",
+    "No change to reported model benchmark metrics",
+    "No locked test evaluation performed"
+  ]
+}

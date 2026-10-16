@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "verified_on": "2026-10-16",
+  "archive_sha256": "f1ff275e2fbbab37930fd20fa5d0b84e2b3846a5fb8e75f040f80e981abd5114",
+  "documents": 50,
+  "checks": [
+    "Archive integrity; 50 unique IDs in matching order across all three journals",
+    "Reports and frozen run specification use identical image/gold fingerprints",
+    "Strict JSON/schema validity independently reparsed; prediction counts verified",
+    "All aggregate match counts, precision, recall and F1 recomputed from per-page recorded counts",
+    "OCR alignment changed 364 boxes and preserved field text/types/row groups and invalid raw outputs",
+    "Timing sum/median/p95 and peak allocated memory recomputed from journals",
+    "Adapter and processor fingerprints match the previously uploaded trained backup",
+    "Metric/schema/recipe and frozen OCR policy hashes match local source",
+    "Final test IDs do not overlap the 40 validation IDs"
+  ],
+  "limitations": [
+    "Original test images and gold labels are absent from this results archive, so gold matching, image contents, full split isolation and the original dataset fingerprint cannot be independently rerun here. Those checks were reported by the Kaggle runner.",
+    "Final evaluation used transformers 5.16.1 and peft 0.20.0; earlier validation used 5.18.0 and 0.21.1. Versions are disclosed; validation versus test is not a controlled software-version comparison.",
+    "No GPU generation was rerun during this verification."
+  ],
+  "runtime": {
+    "gpu": "Tesla T4",
+    "compute_capability": [
+      7,
+      5
+    ],
+    "dtype": "torch.float16",
+    "base_model_commit": "89644892e4d85e24eaac8bacfd4f463576704203"
+  },
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "peft": "0.20.0",
+    "accelerate": "1.14.0",
+    "bitsandbytes": "0.50.2"
+  }
+}

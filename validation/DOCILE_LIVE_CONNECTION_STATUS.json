@@ -1,0 +1,13 @@
+{
+  "revision": "live-jobs-v1",
+  "tests_passed": 60,
+  "tests_skipped": 2,
+  "browser_dom_polling_passed": true,
+  "real_gpu_single_page_api_passed_user_reported": true,
+  "cross_machine_tunnel_verified": true,
+  "public_tunnel_started_by_builder": false,
+  "generation_recipe_changed": false,
+  "test_set_used": false,
+  "cross_machine_tunnel_verified_user_reported": true,
+  "live_upload_result_user_screenshot_reviewed": true
+}

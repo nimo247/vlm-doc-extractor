@@ -1,0 +1,45 @@
+{
+  "provenance": "User-provided Colab training output; checkpoint files remain in the user runtime and are not included in this package",
+  "gpu": "Tesla T4",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "optimizer_steps_requested": 2,
+  "training_completed": true,
+  "trainable_parameters": 8716288,
+  "total_parameters": 2136248320,
+  "precision": {
+    "model_compute": "float16",
+    "trainable_weights": "float32",
+    "base_storage": "4-bit NF4",
+    "loss_type": "nll"
+  },
+  "data": {
+    "source_kind": "synthetic-rendered",
+    "records": 12,
+    "train": 8,
+    "validation": 2,
+    "test": 2
+  },
+  "metrics": {
+    "train_loss": 0.2923327833414078,
+    "eval_loss": 0.2852,
+    "train_runtime_seconds": 14.3738,
+    "peak_torch_allocated_gpu_bytes": 4231623680,
+    "step_losses": [
+      0.2785,
+      0.3062
+    ],
+    "step_gradient_norms": [
+      0.7066,
+      0.5101
+    ]
+  },
+  "versions": {
+    "torch": "2.11.0+cu130",
+    "transformers": "5.18.0",
+    "trl": "1.15.0",
+    "peft": "0.21.1",
+    "datasets": "4.8.5"
+  },
+  "real_document_quality_evaluated": false,
+  "checkpoint_included": false
+}

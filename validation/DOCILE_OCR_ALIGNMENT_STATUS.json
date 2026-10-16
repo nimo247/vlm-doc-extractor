@@ -1,0 +1,415 @@
+{
+  "status": "builder CPU evaluation completed; no builder GPU training or serving run",
+  "date": "2026-10-15",
+  "source_adapter": "docile-readable-4096-full-3ep",
+  "source_adapter_predictions_sha256": "2e294e438dd8e816c1aede900b8565d2fd2ca1c75072b633cebd402134a1e5de",
+  "original_metrics_reproduced": true,
+  "reference_hashes_verified": 40,
+  "test_documents_used": 0,
+  "test_scope": "50 locked test pages not supplied or evaluated",
+  "unit_tests_passed": 8,
+  "all_40_text_type_row_invariants_passed": true,
+  "invalid_outputs_preserved": true,
+  "baseline_nonempty_documents": 28,
+  "alignment_page_effects": {
+    "key_field_grounded": {
+      "improved": 9,
+      "worse": 3,
+      "same": 28
+    },
+    "line_item_grounded": {
+      "improved": 16,
+      "worse": 1,
+      "same": 23
+    }
+  },
+  "initial_40_page_alignment_wall_seconds": 33.69843972299998,
+  "initial_40_page_alignment_ocr_cache_hits": 3,
+  "limitations": [
+    "Development validation experiment, not final test or official DocILE scores",
+    "Eight-category OCR rule baseline has no line-item parser",
+    "OCR alignment preserves extraction content and cannot fix wrong labels, missing text or rows",
+    "Not uniformly beneficial on individual pages",
+    "DocILE path not yet integrated into app/hosted inference"
+  ],
+  "comparison": {
+    "scope": "validation-only CPU OCR alignment experiment; not official DocILE scores",
+    "source_run": "../evaluated-backup-inspection",
+    "selected_documents": [
+      {
+        "id": "049ae2c3f29945b481c22617",
+        "image_sha256": "7aca07ae73bcbcdb17f4bed797af19aabd44997792d70fe89b304a6c080ddf3b",
+        "gold_sha256": "c9b162b384ed945ab580022f7623a8458d0dc55ebd8487c6f7aa88e711679804"
+      },
+      {
+        "id": "13c6c1fed1aa4184aa1a4ee2",
+        "image_sha256": "3f7ea80478cddecb6c10bcd84635a2858c7559c7abd737859361462a7cd62007",
+        "gold_sha256": "aaa9e4b0e44165f494be98a61fdc27e699b426ff1e6d95aec2f5ec5c5fb246b3"
+      },
+      {
+        "id": "1735ab9d84bc4dc28c90c09b",
+        "image_sha256": "c1cbb3469686cba5f3c131dcbe7dc7713fc82a159205aa899705315018175e16",
+        "gold_sha256": "884c4edb99f226b32a8add51e373ae18013905146d7350ac796f346c41e94bd7"
+      },
+      {
+        "id": "18bf4b8e252c4178be78c7ca",
+        "image_sha256": "836193a628b99feef8b72afc7e53095131ca7246ce1eb983ecd3bea0b61e08e0",
+        "gold_sha256": "f0f5e18d241566992934d21404aaa51b636be7d31864398c741e4c732346ca16"
+      },
+      {
+        "id": "2065323e44014caeb23be237",
+        "image_sha256": "34cbdde542179c7830e03f523ac201b77ace6627979f4aba9c202530fa28631d",
+        "gold_sha256": "bba5979f61027eadee708137d7c36b0266da82c564dd2d8c155f089b7eff406c"
+      },
+      {
+        "id": "2175f6e4d4b747809cef80d1",
+        "image_sha256": "16ba3f382c7dfe3be9432d2a67739c09305c3076e47117d664dd920e51bc27ea",
+        "gold_sha256": "68beef2ef67ecaa23fc9eed068a8e6e3142abca43847e4050b05b3f6f70e4dda"
+      },
+      {
+        "id": "21c81e58fd6344a9bde2ae74",
+        "image_sha256": "e84c0ceb976142d998829f829aa255196b353d916d4f267554f747a611c13f6b",
+        "gold_sha256": "622f875ce68e07683ca338982e6f8806698a275070098caf940b3f9bb1497ced"
+      },
+      {
+        "id": "2464efe117b1499cb7a1cd35",
+        "image_sha256": "7ec1a1df5cd246ebfabf137db8d80c030edee0e8c84898870dfb0f9be35b065d",
+        "gold_sha256": "0b2ff1bc2b7ce7ff967aa2854845bceb19d35a12587bc0e4b98d123558a2bfc2"
+      },
+      {
+        "id": "2b3d0cfd563b44da9ccf1dd2",
+        "image_sha256": "9534703bfe0a93c4a773dfb202a48250e8d73f2d63da90dd2092def7a9670146",
+        "gold_sha256": "9d7cc1c219cc5c752d585bb740d1a3da5f3c4eaa1e6db1282141a13b5670fc53"
+      },
+      {
+        "id": "3075d408c94841ba9c852ad9",
+        "image_sha256": "a82cf40d9bdb15892efd2c35d84a820535d6d4633370b0a4424cad56a0288685",
+        "gold_sha256": "4c6abd36efe8a7babb01d6d8e87a42dc6f1328d0d1a55aeb687e62604e9d0baf"
+      },
+      {
+        "id": "35bd68848dcd4811b4c936d9",
+        "image_sha256": "89b6ab9ed633eb8553c9d6d63a1b66c576cec050d3f4c2599b38eba0d77581d9",
+        "gold_sha256": "074680cc831f37724d8de8ae5b4ceac053cb8e72d376f444d56681fdca03a663"
+      },
+      {
+        "id": "370f67e7a5074caa8128a5b7",
+        "image_sha256": "d97978d9b9cf69f72d04d65d9ed2a6c372c7ec9a59ac48359adb6f5fdb59dbb0",
+        "gold_sha256": "8f39c72858fc1cbdc22240f610034dee07da44bd804649c2d807bd742611566f"
+      },
+      {
+        "id": "3a461b8ded0d4c14a6d60241",
+        "image_sha256": "de38cd9ccd6a1c1e9a9687e92c55b2eba4c05572677b1fbdac942bdb157436ac",
+        "gold_sha256": "dfc6c61327da66c8b08a925e2b4a7c6527755a9fdec20df46ce1dfe13ed86ac5"
+      },
+      {
+        "id": "44e6cc4102f545aa87f9f7dc",
+        "image_sha256": "760c11c86d31743a3232961130afbb5030aab068f71060f2cbda85e308c5cdff",
+        "gold_sha256": "28546252aaebf9e1f8fcddc304edd6535be24541b0d07deac1195bd3728bc250"
+      },
+      {
+        "id": "47d5ca00cbe74c0997c195a8",
+        "image_sha256": "31082e87265930443a2256fcfc089f6c0465b4f76708f08bb62eeddb565c28eb",
+        "gold_sha256": "086baeb830f2f58380046121eb3f9407030d12549b910fb2cdf268950dff2fd9"
+      },
+      {
+        "id": "482c13484ae645daac416200",
+        "image_sha256": "c4040ba4f32808ceb09ce0ae333b01ab6912a315a54b0e8829b3192687c0ca58",
+        "gold_sha256": "5a4446a4f898acb3b982bbee260a7bc74ae5318a8c11b77912b037506dac6c1d"
+      },
+      {
+        "id": "4c318fd211e64567aad99658",
+        "image_sha256": "caa988bb18c98ea3e29f340c6cf7e15a14c671eb8fa244f1c0e84b35964095e1",
+        "gold_sha256": "1bfb2fa56a3537a73a485f3a1af7178495f4beabdbf9454fd456dc20d1dc9b31"
+      },
+      {
+        "id": "4d85703835b14d0c9cf006be",
+        "image_sha256": "5418055ab08e355dc579eda11b86906699733f29bec42c2e6e02fee6e896cab0",
+        "gold_sha256": "08f1fd77b7b0be3dd4235ef133589e84d80744088f9b0f7fda72fabad49990c8"
+      },
+      {
+        "id": "56506852e7744af5a60390d8",
+        "image_sha256": "13ad776e520878dd51e97b1050bca964c5d5526a93bec9aef84f167577264b16",
+        "gold_sha256": "96348433bc2125b75ca3e6a6de16091dbfb8840947344fe623e2dff8b4bfb674"
+      },
+      {
+        "id": "5855574786cf4439a27147ef",
+        "image_sha256": "13bd0049d956b246105435de45e5b47a0e33f81a24b79fb95760ec56dc25713f",
+        "gold_sha256": "c0f1a8e710f0f5a8aac20034313a6e2bd474ba6b6d43ba438757d5cde8b63b33"
+      },
+      {
+        "id": "58c8d63d47374d408ea443d8",
+        "image_sha256": "8a69f9a97d224f2d80dd5bdb57470caf06b3a1c415d7341c02015a7429cbbcc3",
+        "gold_sha256": "9172b8416800d13d76c55fbf6f02c18d0cf984849a01d26197f54f242d5aea48"
+      },
+      {
+        "id": "59ccad4cf4b840deb6eda5fe",
+        "image_sha256": "49ca41dd5d142f2b46038719c025967d0f95da558ab4ca475c3ee31c94e09283",
+        "gold_sha256": "1a350717cd599d79f62414569a51dcdb099bf5aa834f1a36d59c1700c02ac954"
+      },
+      {
+        "id": "5af83512c5634a4d9fa56e36",
+        "image_sha256": "379e3ef2851e278bb03efdd37470dc97cc7dca6bfe9da0dc4e7e13e85a59c80e",
+        "gold_sha256": "8543f9bc7956deee46feb3051913ff0babcfa52cde47184fce8b8ab73b712be9"
+      },
+      {
+        "id": "5db8abd6665a4eec93f59e96",
+        "image_sha256": "f52e59e4bf340487d386d63da7e2090482919b67ab7f2f4cd134e433c808a2a5",
+        "gold_sha256": "899e572b1761517ce16634072d5d268d4f7735573b9eb4808758d393bddad662"
+      },
+      {
+        "id": "671b35714a414c5f8642a307",
+        "image_sha256": "29effd652cc8ee0a48d81950edc15e799004133ea9141d210224a2aa089fc709",
+        "gold_sha256": "a21124d5a94cd4649f398d53ce9f9f0bb73e7bc54ec1458ad62c6bcc81dd5f19"
+      },
+      {
+        "id": "7524a5e2037a46028c65b08e",
+        "image_sha256": "ce7ff6c299586b0b8a6c946a8151d359b027366bfb9a86233b54b22ac6c2f4dc",
+        "gold_sha256": "a80b35ce862b0a14823be4d1e8ca79a9a90563c679860608d3321599515df218"
+      },
+      {
+        "id": "85e28a78324d4405a58e267d",
+        "image_sha256": "429dbc9c9a82491c21a3ebd69d9befbd3128477e2acb37deb986831d6b162991",
+        "gold_sha256": "4349c382b3011ddd49a7e93eadcb515489edaf600bfcca0b4b8d9c346a0723aa"
+      },
+      {
+        "id": "8fd0287d6662416aaf8785dc",
+        "image_sha256": "bcfb07b9c87201aedc7c98cde7558b3ad0dcf1b0d1aea647320f6b076d7c1be4",
+        "gold_sha256": "b6eabaa3ddf73c693dfd0399ead41a6423022010052d380f39a27377f7e1c874"
+      },
+      {
+        "id": "92d65e5cca8f4fe1b29fa101",
+        "image_sha256": "d21099908fc01765faea90f003af1f6023495c3397b3c9330d7f4d2b05de8251",
+        "gold_sha256": "a573f6501200cbb063e65753f73a430e82990fc7967a74cd30365f6be29a99c0"
+      },
+      {
+        "id": "a266bda7978447ae8d3c13dd",
+        "image_sha256": "1659909f70ad60f467cc575e73667b5b3b9e2fe996f40d6bc337890036197fce",
+        "gold_sha256": "d7a193357449866352e7eac773f93f132dc7def88bfd05414c9d480d0f5c31c2"
+      },
+      {
+        "id": "a37d8ec781284b0b8e72efa7",
+        "image_sha256": "0b504cfdca55a9f32bef686bf3f5fe5602d56cd1d9ec1d68ef3941f13bb3cbcc",
+        "gold_sha256": "5958d00b8b4a0c8921a92e9e7465066ad1253a67d9cb55b4b545439704369605"
+      },
+      {
+        "id": "aaf7ef0a5f4641b6a18b9023",
+        "image_sha256": "07f4a9e272e5a7d67a1b9e40282be65043cf67ce966a80543f8ca6c3ce7c9155",
+        "gold_sha256": "47677a646b4ed847e5521988d57aae9274a087f6def40ec9aa074e6d3440cc2d"
+      },
+      {
+        "id": "b73c5ca272b54212be9dfa29",
+        "image_sha256": "cfab8fe78383fc7ebd6b507de6bbad66435a8d1b81f4e1c678aaca04bd7e5d4f",
+        "gold_sha256": "d37117a84ed1b2694b92cc3aad6f7936e8fc25a1e5a6fe747ced2a21b104fb5f"
+      },
+      {
+        "id": "bc66dc1acb594aa4a48f7742",
+        "image_sha256": "9bf6b51c3625240e07085d7dcdbf088c32643eb59b53c0925ee069052e657eeb",
+        "gold_sha256": "f358a9b24445022ed603d6a885ca5a576476676524e0126a55554d4bd9e33181"
+      },
+      {
+        "id": "cbadcfb80f20438db69d6b06",
+        "image_sha256": "5de1683c7ebe4d32f896413015a4299188e2d9812c81f8c87c68c78f08ed2159",
+        "gold_sha256": "4ad9961060229e012498fef9f8244002e93f406de3519cd943659f5914eb953a"
+      },
+      {
+        "id": "d0d63a7447a94a648a68b619",
+        "image_sha256": "d9ca27eda3976e6e4d4c64be4f23b12a26699e939bc4107726bb1ceb5e910535",
+        "gold_sha256": "99dcb76e41f203599e1b796f8dce57df98ced5cbf096346311682ab482894a92"
+      },
+      {
+        "id": "dc8a084aa6434dfe91bb10ce",
+        "image_sha256": "d1d762be584decb219d58d45dbfc6524d56b363ccef65f0b5c0e5ed5103473e3",
+        "gold_sha256": "e31c24bf04aae4f6a0c3414ba103dcfda033b33efdc5f0741be1a80c58b1bdc6"
+      },
+      {
+        "id": "e7491f45171d4f6ca366bee0",
+        "image_sha256": "3fb996e60c93cc4ae3748cf275a924b73917d37571fe95024b4616c342b639d7",
+        "gold_sha256": "4cf71c96ba20a6db7141baf1153ddce5d37bcc3d857adcdaf01a34c0a5078e17"
+      },
+      {
+        "id": "f1077e4cb2554639845f4400",
+        "image_sha256": "c0938c2dc91d214375e227199f619333947078800508d045d43ef741f2c8d2b5",
+        "gold_sha256": "264255fd78f90e150d21cee02b0cf27e2202887fe0bb86b277d5eb71ca7e42ea"
+      },
+      {
+        "id": "f1320edee01c4ff9b002a3f9",
+        "image_sha256": "698cf1ddf6943d473e672384143bede0b0cb58d81df4c75a4632e6f0fc4fd568",
+        "gold_sha256": "f7a76e31ec28bdd092a1a7f387fe19de309da92c0060adbc85e973ea38ddbd91"
+      }
+    ],
+    "tesseract": "tesseract 5.3.4",
+    "policy": {
+      "scale": 2,
+      "psm": 3,
+      "minimum_confidence": 50,
+      "padding": 0.002,
+      "maximum_center_distance": 0.15,
+      "matching": "case and whitespace normalization only",
+      "changes": "boxes only; no field text, types or row groups changed",
+      "invalid_predictions": "preserved without repair"
+    },
+    "wall_seconds": 0.34090550399992026,
+    "ocr_cache_hits": 40,
+    "ocr_seconds_sum": 70.26597173400012,
+    "box_changes": 395,
+    "original_adapter": {
+      "documents": 40,
+      "json_valid_rate": 0.9,
+      "schema_valid_rate": 0.75,
+      "generation_errors": 0,
+      "output_token_limit_hits": 3,
+      "metrics": {
+        "key_field_text": {
+          "matched": 139,
+          "predicted": 288,
+          "gold": 471,
+          "precision": 0.4826388888888889,
+          "recall": 0.2951167728237792,
+          "f1": 0.3662714097496706
+        },
+        "key_field_text_and_bbox_iou50": {
+          "matched": 94,
+          "predicted": 288,
+          "gold": 471,
+          "precision": 0.3263888888888889,
+          "recall": 0.19957537154989385,
+          "f1": 0.24769433465085638
+        },
+        "line_item_cell_text": {
+          "matched": 225,
+          "predicted": 393,
+          "gold": 585,
+          "precision": 0.5725190839694656,
+          "recall": 0.38461538461538464,
+          "f1": 0.4601226993865031
+        },
+        "line_item_cell_text_and_bbox_iou50": {
+          "matched": 84,
+          "predicted": 393,
+          "gold": 585,
+          "precision": 0.21374045801526717,
+          "recall": 0.14358974358974358,
+          "f1": 0.17177914110429449
+        },
+        "complete_line_item_row_text": {
+          "matched": 23,
+          "predicted": 97,
+          "gold": 173,
+          "precision": 0.23711340206185566,
+          "recall": 0.1329479768786127,
+          "f1": 0.17037037037037037
+        }
+      }
+    },
+    "ocr_aligned_adapter": {
+      "documents": 40,
+      "json_valid_rate": 0.9,
+      "schema_valid_rate": 0.75,
+      "generation_errors": 0,
+      "output_token_limit_hits": 3,
+      "metrics": {
+        "key_field_text": {
+          "matched": 139,
+          "predicted": 288,
+          "gold": 471,
+          "precision": 0.4826388888888889,
+          "recall": 0.2951167728237792,
+          "f1": 0.3662714097496706
+        },
+        "key_field_text_and_bbox_iou50": {
+          "matched": 105,
+          "predicted": 288,
+          "gold": 471,
+          "precision": 0.3645833333333333,
+          "recall": 0.2229299363057325,
+          "f1": 0.2766798418972332
+        },
+        "line_item_cell_text": {
+          "matched": 225,
+          "predicted": 393,
+          "gold": 585,
+          "precision": 0.5725190839694656,
+          "recall": 0.38461538461538464,
+          "f1": 0.4601226993865031
+        },
+        "line_item_cell_text_and_bbox_iou50": {
+          "matched": 143,
+          "predicted": 393,
+          "gold": 585,
+          "precision": 0.3638676844783715,
+          "recall": 0.24444444444444444,
+          "f1": 0.29243353783231085
+        },
+        "complete_line_item_row_text": {
+          "matched": 23,
+          "predicted": 97,
+          "gold": 173,
+          "precision": 0.23711340206185566,
+          "recall": 0.1329479768786127,
+          "f1": 0.17037037037037037
+        }
+      }
+    },
+    "ocr_rule_baseline": {
+      "supported_key_field_types": [
+        "document_id",
+        "date_issue",
+        "date_due",
+        "amount_due",
+        "amount_total_gross",
+        "amount_total_net",
+        "amount_total_tax",
+        "payment_terms"
+      ],
+      "line_items_supported": false,
+      "evaluation_scope": "all gold categories remain in the denominator",
+      "documents": 40,
+      "json_valid_rate": 1.0,
+      "schema_valid_rate": 1.0,
+      "generation_errors": 0,
+      "output_token_limit_hits": 0,
+      "metrics": {
+        "key_field_text": {
+          "matched": 39,
+          "predicted": 57,
+          "gold": 471,
+          "precision": 0.6842105263157895,
+          "recall": 0.08280254777070063,
+          "f1": 0.14772727272727273
+        },
+        "key_field_text_and_bbox_iou50": {
+          "matched": 34,
+          "predicted": 57,
+          "gold": 471,
+          "precision": 0.5964912280701754,
+          "recall": 0.07218683651804671,
+          "f1": 0.12878787878787878
+        },
+        "line_item_cell_text": {
+          "matched": 0,
+          "predicted": 0,
+          "gold": 585,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "line_item_cell_text_and_bbox_iou50": {
+          "matched": 0,
+          "predicted": 0,
+          "gold": 585,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "complete_line_item_row_text": {
+          "matched": 0,
+          "predicted": 0,
+          "gold": 173,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    }
+  }
+}

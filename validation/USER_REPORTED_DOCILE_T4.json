@@ -1,0 +1,53 @@
+{
+  "provenance": "User-provided Colab logs on 2026-10-14; builder did not execute GPU training",
+  "gpu": "Tesla T4",
+  "docile_smoke": {
+    "optimizer_steps": 2,
+    "training_examples_seen": 8,
+    "validation_examples": 40,
+    "train_loss": 1.0059462189674377,
+    "eval_loss": 0.9217,
+    "eval_mean_token_accuracy": 0.6846,
+    "peak_allocated_gpu_bytes": 14849033216,
+    "training_completed": true,
+    "exit_code": 0
+  },
+  "unbounded_full_run": {
+    "planned_optimizer_steps": 50,
+    "completed_optimizer_steps": 6,
+    "training_completed": false,
+    "failure": "CUDA OOM during backward; attempted allocation 4 GiB"
+  },
+  "bounded_recovery": {
+    "training_token_budget": 3072,
+    "max_pixels": 131072,
+    "activation_offloading": true,
+    "target_truncation": false,
+    "heldout_changes": false,
+    "cpu_tests_passed": 21,
+    "builder_gpu_execution": false,
+    "actual_user_retained_training_count": 102,
+    "user_gpu_execution_completed": true
+  },
+  "model_quality_established": false,
+  "note": "Teacher-forced token accuracy is not document extraction accuracy. Full-run completion and inference evaluation remain unverified.",
+  "bounded_full_run": {
+    "provenance": "User-uploaded Pasted markdown(3).md, read on 2026-10-14 UTC",
+    "training_completed": true,
+    "train_documents": 102,
+    "validation_documents": 40,
+    "test_documents_reserved": 50,
+    "excluded_train_documents": 98,
+    "optimizer_steps": 26,
+    "epochs": 1,
+    "largest_original_sequence_tokens": 8748,
+    "largest_retained_sequence_tokens": 3069,
+    "train_loss": 1.062288387463643,
+    "eval_loss": 0.8465,
+    "eval_mean_token_accuracy": 0.6989,
+    "train_runtime_seconds": 754.8654,
+    "peak_allocated_gpu_bytes": 14838130176,
+    "checkpoint": "checkpoints/docile-t4-bounded-3072-full",
+    "weights_received_by_builder": false
+  }
+}

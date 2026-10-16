@@ -1,0 +1,13 @@
+{
+  "recipe": "docile-readable-v1",
+  "cpu_tests_passed": 5,
+  "cpu_test_command": "python -m unittest tests.test_docile_readable -v",
+  "tensor_mask_tests": "NumPy tensor double; real Torch/processor preflight must run in Colab",
+  "metric_regression_checks_passed": 4,
+  "python_syntax_and_cli_help_verified": true,
+  "model_weights_loaded_by_builder": false,
+  "real_dataset_preflight_by_builder": false,
+  "gpu_memory_tested": false,
+  "trained_adapter_included": false,
+  "extraction_quality_established": false
+}

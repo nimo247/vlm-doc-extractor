@@ -1,206 +1,78 @@
 # EvidenceDoc
 
-A document parsing workbench and reproducible VLM fine-tuning project. Upload a PDF or image, inspect ordered blocks and tables, extract labeled fields with evidence references, and export canonical JSON or deterministic Markdown.
+A small vision-language model fine-tuned for invoice key fields, bounding boxes and grouped line items, with a browser workspace for inspecting results and failures.
 
-**Current state:** functioning CPU baselines and application; generated labeled development data; evaluation, training, and serving scripts. No fine-tuned checkpoint is included. GPU training, VLM server inference, and the optional Docling baseline must be validated on the appropriate environment. This is an initial research implementation, not a completed model-performance claim.
+**Current status:** training, 40-page validation and the frozen 50-page test are complete. On the custom test subset, the adapter achieved 34.88% key-field text F1, 33.66% line-item cell text F1 and 70% schema validity. The user demonstrated a fresh PDF upload through the Codespaces UI, authenticated Kaggle T4 service and review/export interface. Substantial semantic and localization errors remain; this is an evaluated prototype.
 
-## Run locally
+## Implemented
 
-Use Python 3.10+ (3.12 recommended). Open a terminal in the extracted `EvidenceDoc` directory.
+- Qwen/Qwen3-VL-2B-Instruct, 4-bit NF4, rank-8 LoRA: 8,716,288 trainable parameters, about 0.408% of all parameters.
+- Custom DocILE subset: 168 training pages, 40 validation pages, 50 locked test pages; group/source-separated splits derived from official training data. This is not the official DocILE benchmark.
+- Training on one Tesla T4: approximately 69 minutes and 6.6 GiB peak PyTorch allocated memory, recorded in the user's run.
+- Explicit image-resolution handling, complete-example filtering, assistant-only loss and supervised end-of-turn tokens.
+- Strict schema checks; field/cell text F1, one-to-one box matching at IoU >= 0.5 and complete-row metrics. Invalid outputs count as misses.
+- Eight-category Tesseract/rules baseline and optional OCR box alignment, preserving field text, types, row groups and original raw output.
+- FastAPI UI, source-region overlays, manual JSON review, JSON/Markdown exports, authenticated GPU service and short-request job polling.
+- Resumable evaluation with per-page disk saves, downloadable progress snapshots and refusal to mix changed data/model/configuration settings.
 
-```bash
-python -m venv .venv
-# Linux / macOS
-source .venv/bin/activate
-# Windows PowerShell instead:
-# .venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev]"
-python -m scripts.generate_data --count 60
-python -m uvicorn evidencedoc.app:app --host 127.0.0.1 --port 8000
-```
+The live adapter receives a page image and generates extraction JSON. Tesseract is a separate backend or optional alignment stage. Native-PDF semantic evidence checks are proposed future work. The demonstrated GPU service uses Transformers/PEFT; vLLM performance has not been established.
 
-Open http://127.0.0.1:8000. Click a sample, then **Parse document**. Fields link to the parsed page region. The Structure tab displays ordered blocks and tables. Select Markdown before downloading a `.md` export; the other tabs download JSON.
+## Final test results
 
-Tesseract is required for scanned images. Native PDFs with embedded text work without it.
+Micro F1 on all 50 original locked test pages, evaluated once with the completed adapter and existing OCR policy. Failed outputs remain in the denominator. These are custom subset scores, not official DocILE scores.
 
-- Ubuntu / WSL: `sudo apt-get install tesseract-ocr tesseract-ocr-eng`
-- macOS with Homebrew: `brew install tesseract`
-- Windows: install Tesseract using a Windows distribution linked from its official installation documentation, and put its executable directory on PATH. Restart the terminal after changing PATH.
+| Metric | OCR/rules (eight categories) | Adapter | Adapter + OCR boxes |
+|---|---:|---:|---:|
+| Key-field text | 7.36% | 34.88% | 34.88% |
+| Key-field text + box | 7.02% | 24.10% | 28.12% |
+| Line-item cell text | Unsupported | 33.66% | 33.66% |
+| Line-item cell text + box | Unsupported | 15.74% | 23.00% |
+| Complete-row text | Unsupported | 9.95% | 9.95% |
 
-Docker alternative (CPU application):
+The adapter returned valid JSON on 40/50 pages and schema-valid output on 35/50. Eight generations hit the 4,096-token cap; no execution errors occurred. OCR alignment changed 364 boxes without changing text, field types or row groups. The partial OCR baseline covers eight categories and no line items; all gold categories remain in its denominator.
 
-```bash
-docker build -t evidencedoc .
-docker run --rm -p 127.0.0.1:8000:8000 evidencedoc
-```
+Tesla T4 adapter generation took 153.0 minutes in total, with a median of 117.8 seconds/page and p95 of 435.8 seconds/page. Peak PyTorch allocated memory was 2.36 GiB; this excludes reserved memory and is not total GPU usage. The CPU OCR comparison added 47.3 seconds of wall time. No base-model test score is claimed.
 
-The API reference is at `/docs`. Uploads are processed in memory and temporary OCR files are removed after processing. This local app accepts files up to 20 MB and PDFs of up to eight pages. It has no account system or hosted GPU service.
+See [the final report](docs/DOCILE_FINAL_RESULTS.md), [recorded aggregate results](benchmarks/docile-final-test/final_summary.json) and [verification scope](validation/DOCILE_FINAL_RESULTS_VERIFICATION.json). Final evaluation used Transformers 5.16.1 and PEFT 0.20.0; validation used 5.18.0 and 0.21.1, so cross-split changes are not a controlled software-version comparison.
 
-## What works now
+## Measured validation results
 
-| Component | Behavior |
-|---|---|
-| `baseline` | Native PDF text extraction; Tesseract fallback for image-only pages |
-| `ocr` | Tesseract on every page, followed by conservative label/table rules |
-| `vlm` | Real request to a configured OpenAI-compatible vision model; no fabricated fallback |
-| Schema | Strict types, sequential pages, unique field names, valid boxes, rectangular tables, evidence reference checks |
-| Markdown | Deterministically rendered from the validated document JSON |
-| Evaluation | Fields, absent-field false extraction, literal unsupported values, text CER, table cells, block coverage, matched reading-order pairs |
-| Training | Qwen3-VL QLoRA recipe; GPU execution remains to be run |
-| Benchmark | Client latency, concurrency, failures, throughput; device memory via an independent NVIDIA sampler |
+Micro F1 on the same 40 validation pages. Development choices were made on validation; these are not untouched test scores.
 
-The CPU parser is intentionally simple. It recognizes explicit `Vendor:`, `Invoice number:`, `Purchase order number:`, `Issue date:`, `Currency:`, and `Total:` labels. It recognizes explicitly separated tables with familiar headers. It is not a learned general document parser. Its weaknesses provide measurable tasks for VLM adaptation.
+| Metric | OCR/rules | Adapter | Adapter + OCR boxes |
+|---|---:|---:|---:|
+| Key-field text | 14.77% | 36.63% | 36.63% |
+| Key-field text + box | 12.88% | 24.77% | 27.67% |
+| Line-item cell text | Unsupported | 46.01% | 46.01% |
+| Line-item cell text + box | Unsupported | 17.18% | 29.24% |
+| Complete-row text | Unsupported | 17.04% | 17.04% |
 
-## Output contract
+OCR rules cover eight field categories and no line items; all gold categories remain in the denominator. Thirty of 40 adapter outputs passed the schema. The base VLM had 0/40 accepted outputs under the same strict task prompt/parser; this exposes format/schema failures and does not establish zero reading ability or superiority to stronger AI systems.
 
-`GET /api/schema` returns the complete JSON Schema. `POST /api/parse?backend=baseline&max_edge=1600` accepts a multipart `file` and returns `document`, `markdown`, `metadata`, and page `previews`.
+Recorded adapter generation latency had a median of 118.5 seconds and a maximum of 465.1 seconds. A user-reported API smoke test generated 719 tokens in 79.1 seconds with about 2.30 GiB peak PyTorch allocated memory. A separate fresh restaurant-invoice upload took about 2.2 minutes and confused quantities and addresses. Schema validity is not semantic correctness.
 
-```json
-{
-  "schema_version": "1.0",
-  "document_type": "invoice",
-  "pages": [{"index": 0, "blocks": [{
-    "id": "b0", "type": "paragraph",
-    "bbox": {"x0": 0.1, "y0": 0.1, "x1": 0.6, "y1": 0.15},
-    "text": "Invoice number: INV-001", "rows": [], "level": 2
-  }]}],
-  "fields": [{
-    "name": "invoice_number", "value": "INV-001", "reason": null,
-    "evidence": [{"page_index": 0, "block_id": "b0", "quote": "Invoice number: INV-001"}]
-  }]
-}
-```
+## Run the application
 
-The app requires the six configured fields; missing values use `null`, an empty evidence array, and a reason. Coordinates are normalized to the rendered page. First table rows are headers. Merged cells, formulas, handwritten text, advanced multi-column reading order, and cross-page tables are outside the initial contract.
+Install the application with `python -m pip install -e .`, restore the evaluation/review backups with `python -m scripts.restore_docile_review`, then start `python -m uvicorn evidencedoc.app:app --host 127.0.0.1 --port 8000` and open `/docile`.
 
-**Evidence validation checks self-consistency, not image truth.** A VLM could invent a block and then quote it. Only independently labeled visual evaluation establishes that a value and region are grounded in the page. The UI therefore says “Evidence linked”, not “Verified”.
-
-## Dataset workflow
+The final evaluation has already completed. These commands document reproduction or recovery on a compatible Kaggle GPU environment; another long GPU run is not needed to view the saved results:
 
 ```bash
-python -m scripts.generate_data --count 60
-evidencedoc audit data/generated/manifest.jsonl
-python -m scripts.train --dry-run
+python -m scripts.finalize_docile --prepare-only
+python -u -m scripts.finalize_docile
 ```
 
-The generator creates original business documents across six rendering/layout families. Four families are training, one validation, and one test. Each family contains invoices and purchase orders as count increases. Every label follows the same JSON schema. Samples use fictitious vendors and no real personal information.
+The runner restores original data from attached Input folders, checks the registered test fingerprint and adapter hash, evaluates only the adapter on the 50 test pages, and applies the existing CPU OCR/alignment policy. Base versus adapter remains a validation-only comparison. Resume requires retained result files and identical settings. Source archives omit model weights, real document data and predictions.
 
-Manifest paths are relative to the project root (or absolute). Run scripts from that root. Example record:
+- [Application and live connection](docs/DOCILE_APP.md)
+- [Measured OCR comparison](docs/DOCILE_OCR_ALIGNMENT.md)
+- [Final results and limitations](docs/DOCILE_FINAL_RESULTS.md)
+- [Reproduction, interruption recovery and demo handoff](docs/DOCILE_FINALIZE.md)
+- [Resume project entry](docs/EVIDENCEDOC_RESUME.tex)
+- [Earlier general document workspace](docs/LEGACY_DOCUMENT_WORKSPACE.md)
 
-```json
-{"id":"real_001","group_id":"vendor-layout-A","source_id":"original-document-001","split":"train","image_path":"data/real/001.png","label_path":"data/real/001.json","source_kind":"human-labeled-real"}
-```
+Tests: `python -m pip install -e '.[dev]'` followed by `python -m pytest -q`.
 
-`group_id` must identify the vendor/template family; `source_id` must be shared by all augmentations of an original. Auditing rejects IDs, group/source leakage, duplicate image bytes across splits, and invalid labels. Hash checks do not detect near-duplicate scans: manually review them and record their common source IDs.
+Scope: single-page English key-field and line-item extraction. Full-page transcription, handwriting, multi-page linking, durable production queues and reliable semantic verification are outside the demonstrated capability. Keep the forwarded review app private; it has no user accounts. No official DocILE score or production reliability claim is made.
 
-Generated data are a pipeline smoke test. Do not put their scores on a resume as real-world accuracy. Next collect roughly 50 independently checked pages for development, then a separate locked real-document test set. Ensure permitted use of every document. Public receipts such as CORD can help with receipt extraction, but do not provide all full-page structure labels this project needs. Inspect and annotate the missing labels rather than silently treating model outputs as ground truth.
-
-## Evaluate quality
-
-```bash
-python -m scripts.evaluate --backend ocr --split test --output outputs/ocr
-python -m scripts.evaluate --backend vlm --split test --output outputs/base-vlm
-# After training, change EVIDENCEDOC_MODEL / server to the adapted model:
-python -m scripts.evaluate --backend vlm --split test --output outputs/tuned-vlm
-```
-
-Use the same images, resolution, prompt, output budget, and model size when comparing the base and fine-tuned models. Failed requests remain in the quality denominator. Document-level success includes parsing and schema validation, so failure details must be inspected before interpreting its rate. Empty metric denominators yield `null`, not perfect scores.
-
-Metric definitions and limitations are in `docs/EVALUATION.md`. The optional Docling command exports its own native representation; schema normalization is an explicit follow-up task:
-
-```bash
-python -m pip install -e ".[docling]"
-python -m scripts.docling_baseline samples/sample_invoice.pdf
-```
-
-## Fine-tune on a CUDA GPU
-
-Your laptop can run the app and prepare data. This QLoRA training path needs an NVIDIA GPU with enough VRAM for the chosen image and output lengths. No fixed fit or cost is promised; start with a short run. Training dependencies are separate so ordinary app setup does not install Torch or download model weights.
-
-```bash
-python -m pip install -e ".[train]"
-python -m scripts.train --config configs/qlora.yaml --max-steps 2
-# Inspect loss, masks, saved adapter, and GPU usage, then:
-python -m scripts.train --config configs/qlora.yaml
-```
-
-The recipe uses NF4 four-bit weights, LoRA on language projection modules, a frozen vision encoder, completion/assistant loss, and no sequence truncation that could remove image tokens. It runs validation loss on the validation partition; test data are never passed to the trainer. Image pixels are bounded by the processor. Output lengths can still be large, so inspect memory before scaling.
-
-For a guided GPU session, open `notebooks/finetune_colab.ipynb` in Colab and upload the project ZIP. It installs the separate training dependencies and begins with two training steps. This notebook is supplied without executed GPU outputs.
-
-The current assistant-only VLM masking path follows TRL's documented requirement for Transformers >=5.18. This GPU code has not been executed in the supplied build. If dependency APIs change, pin the versions that pass your smoke run and retain them in the recorded run metadata. After training, `run_metadata.json` records versions, configuration, loss metrics, GPU identity, and peak Torch allocated memory. Exporting an adapter alone is not evidence of a quality improvement.
-
-## Serve the original or trained model
-
-Install vLLM on a suitable separate GPU environment following its hardware-specific documentation. Its port is 8001; the CPU app uses 8000.
-
-```bash
-vllm serve Qwen/Qwen3-VL-2B-Instruct --host 127.0.0.1 --port 8001 --max-model-len 16384 --limit-mm-per-prompt '{"image":8}'
-```
-
-Set the app environment **before starting Uvicorn**:
-
-```bash
-export EVIDENCEDOC_VLM_URL=http://127.0.0.1:8001/v1
-export EVIDENCEDOC_MODEL=Qwen/Qwen3-VL-2B-Instruct
-# If the server requires authentication:
-# export EVIDENCEDOC_API_KEY=your-server-key
-```
-
-PowerShell equivalents use `$env:EVIDENCEDOC_VLM_URL="http://127.0.0.1:8001/v1"` and `$env:EVIDENCEDOC_MODEL="Qwen/Qwen3-VL-2B-Instruct"`.
-
-For a trained adapter, merge it into unquantized weights, then serve the merged directory:
-
-```bash
-python -m scripts.merge_adapter checkpoints/evidencedoc-qwen3vl-2b --output checkpoints/evidencedoc-merged
-vllm serve checkpoints/evidencedoc-merged --served-model-name evidencedoc-tuned --port 8001 --max-model-len 16384 --limit-mm-per-prompt '{"image":8}'
-export EVIDENCEDOC_MODEL=evidencedoc-tuned
-```
-
-The merging step uses additional CPU/GPU memory. The serving configuration is a starting point, not a confirmed VRAM fit. A remote endpoint must be trusted with uploaded document images. `.env.example` is a reference; export variables yourself. Never commit credentials.
-
-## Benchmark and inspect failures
-
-With the app running:
-
-```bash
-python -m scripts.benchmark samples/sample_invoice.pdf --backend baseline --requests 10 --concurrency 1
-python -m scripts.benchmark samples/sample_invoice.png --backend vlm --requests 10 --concurrency 2 --output outputs/vlm-benchmark.json
-```
-
-Repeat with fixed hardware and at least two resolutions/concurrency levels. Record the accuracy change alongside speed. Latency includes upload, page rendering, parsing, previews, and response transfer. Failed calls are counted separately; they are not included in latency quantiles. Model/server warmup is explicit. No GPU memory number is fabricated by the HTTP client.
-
-On the model-server machine:
-
-```bash
-python -m scripts.monitor_gpu --output outputs/gpu_samples.json -- vllm serve checkpoints/evidencedoc-merged --served-model-name evidencedoc-tuned --port 8001
-```
-
-This samples total device memory, including other processes, and can miss transient peaks. For inference allocator peaks, add instrumentation inside the model server. Keep that distinction in every reported result.
-
-## Tests and next milestones
-
-```bash
-python -m pytest -q
-```
-
-1. Run the included app and inspect three generated documents.
-2. Annotate real pages with ordered blocks, tables, boxes, and the six fields.
-3. Run original-model inference and inspect recognition, structure, grounding, and abstention failures.
-4. Run a two-step QLoRA smoke test, then a small complete training run.
-5. Compare base and adapted checkpoints on locked real test data with confidence intervals.
-6. Normalize Docling outputs, add stronger table metrics (e.g. TEDS), and benchmark quality/latency tradeoffs.
-
-Do not claim fine-tuning improvement, real-world accuracy, or GPU efficiency until those experiments exist. The deliverables should include the adapter, data provenance, run configurations, evaluation reports, failure examples, and deployment measurements.
-
-## Sources
-
-- Qwen3-VL model: https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct
-- TRL SFT / VLM training: https://huggingface.co/docs/trl/sft_trainer
-- PEFT quantization: https://huggingface.co/docs/peft/developer_guides/quantization
-- vLLM supported models: https://docs.vllm.ai/en/stable/models/supported_models/
-- Docling: https://github.com/docling-project/docling
-- Tesseract installation: https://tesseract-ocr.github.io/tessdoc/Installation.html
-- CORD receipt dataset: https://github.com/clovaai/cord
-
-Project code and generated samples: MIT license. External tools, models, and datasets retain their own licenses.
+Project code and generated samples are MIT licensed. External tools, models and datasets retain their own licenses.

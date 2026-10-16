@@ -1,0 +1,19 @@
+{
+  "stage": "DocILE labeled key-field and line-item preparation",
+  "cpu_tests_passed": 18,
+  "public_upstream_fixture": {
+    "key_fields": 11,
+    "line_items": 8,
+    "json_characters": 8433
+  },
+  "verified": [
+    "Provided annotation conversion and strict schema validation",
+    "Metadata and header exclusion from extraction targets",
+    "Canonical line-item grouping and Markdown escaping",
+    "Transitive layout/source/PDF split isolation and determinism",
+    "Portable rendered-image data bundle and Arrow message conversion"
+  ],
+  "user_dataset_processed_by_builder": false,
+  "real_document_gpu_training_executed": false,
+  "full_page_gold_created": false
+}

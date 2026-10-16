@@ -1,0 +1,19 @@
+{
+  "revision": "final-results-v1",
+  "cpu_tests_passed": 60,
+  "cpu_tests_skipped": 2,
+  "skips": "optional datasets dependency unavailable in builder QA",
+  "test_inference_run_by_builder": false,
+  "actual_50_page_test_pending": false,
+  "resume_and_interruption_tests_passed": true,
+  "original_adapter_hash_verified_against_backup": true,
+  "new_training_required": false,
+  "native_pdf_semantic_checks_implemented": false,
+  "data_and_weights_in_source_archive": false,
+  "final_test_completed": true,
+  "test_documents": 50,
+  "final_results_verified_locally": true,
+  "verification": "DOCILE_FINAL_RESULTS_VERIFICATION.json",
+  "report": "docs/DOCILE_FINAL_RESULTS.md",
+  "source_release": 14
+}

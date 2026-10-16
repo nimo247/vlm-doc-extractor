@@ -1,0 +1,9 @@
+{
+  "gpu": "Tesla T4",
+  "compute_capability": [
+    7,
+    5
+  ],
+  "dtype": "torch.float16",
+  "base_model_commit": "89644892e4d85e24eaac8bacfd4f463576704203"
+}

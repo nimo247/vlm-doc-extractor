@@ -1,0 +1,171 @@
+{
+  "scope": "custom DocILE extraction metrics; not official DocILE scores",
+  "split": "test",
+  "documents": 50,
+  "adapter": {
+    "documents": 50,
+    "json_valid_rate": 0.8,
+    "schema_valid_rate": 0.7,
+    "generation_errors": 0,
+    "output_token_limit_hits": 8,
+    "metrics": {
+      "key_field_text": {
+        "matched": 165,
+        "predicted": 389,
+        "gold": 557,
+        "precision": 0.4241645244215938,
+        "recall": 0.296229802513465,
+        "f1": 0.3488372093023256
+      },
+      "key_field_text_and_bbox_iou50": {
+        "matched": 114,
+        "predicted": 389,
+        "gold": 557,
+        "precision": 0.2930591259640103,
+        "recall": 0.20466786355475763,
+        "f1": 0.24101479915433405
+      },
+      "line_item_cell_text": {
+        "matched": 139,
+        "predicted": 279,
+        "gold": 547,
+        "precision": 0.4982078853046595,
+        "recall": 0.25411334552102377,
+        "f1": 0.3365617433414044
+      },
+      "line_item_cell_text_and_bbox_iou50": {
+        "matched": 65,
+        "predicted": 279,
+        "gold": 547,
+        "precision": 0.23297491039426524,
+        "recall": 0.11882998171846434,
+        "f1": 0.15738498789346247
+      },
+      "complete_line_item_row_text": {
+        "matched": 11,
+        "predicted": 79,
+        "gold": 142,
+        "precision": 0.13924050632911392,
+        "recall": 0.07746478873239436,
+        "f1": 0.09954751131221719
+      }
+    }
+  },
+  "ocr_aligned_adapter": {
+    "documents": 50,
+    "json_valid_rate": 0.8,
+    "schema_valid_rate": 0.7,
+    "generation_errors": 0,
+    "output_token_limit_hits": 8,
+    "metrics": {
+      "key_field_text": {
+        "matched": 165,
+        "predicted": 389,
+        "gold": 557,
+        "precision": 0.4241645244215938,
+        "recall": 0.296229802513465,
+        "f1": 0.3488372093023256
+      },
+      "key_field_text_and_bbox_iou50": {
+        "matched": 133,
+        "predicted": 389,
+        "gold": 557,
+        "precision": 0.34190231362467866,
+        "recall": 0.23877917414721722,
+        "f1": 0.28118393234672306
+      },
+      "line_item_cell_text": {
+        "matched": 139,
+        "predicted": 279,
+        "gold": 547,
+        "precision": 0.4982078853046595,
+        "recall": 0.25411334552102377,
+        "f1": 0.3365617433414044
+      },
+      "line_item_cell_text_and_bbox_iou50": {
+        "matched": 95,
+        "predicted": 279,
+        "gold": 547,
+        "precision": 0.34050179211469533,
+        "recall": 0.1736745886654479,
+        "f1": 0.23002421307506055
+      },
+      "complete_line_item_row_text": {
+        "matched": 11,
+        "predicted": 79,
+        "gold": 142,
+        "precision": 0.13924050632911392,
+        "recall": 0.07746478873239436,
+        "f1": 0.09954751131221719
+      }
+    }
+  },
+  "ocr_rule_baseline": {
+    "supported_key_field_types": [
+      "document_id",
+      "date_issue",
+      "date_due",
+      "amount_due",
+      "amount_total_gross",
+      "amount_total_net",
+      "amount_total_tax",
+      "payment_terms"
+    ],
+    "line_items_supported": false,
+    "evaluation_scope": "all gold categories remain in the denominator",
+    "documents": 50,
+    "json_valid_rate": 1.0,
+    "schema_valid_rate": 1.0,
+    "generation_errors": 0,
+    "output_token_limit_hits": 0,
+    "metrics": {
+      "key_field_text": {
+        "matched": 22,
+        "predicted": 41,
+        "gold": 557,
+        "precision": 0.5365853658536586,
+        "recall": 0.03949730700179533,
+        "f1": 0.07357859531772576
+      },
+      "key_field_text_and_bbox_iou50": {
+        "matched": 21,
+        "predicted": 41,
+        "gold": 557,
+        "precision": 0.5121951219512195,
+        "recall": 0.03770197486535009,
+        "f1": 0.07023411371237458
+      },
+      "line_item_cell_text": {
+        "matched": 0,
+        "predicted": 0,
+        "gold": 547,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "line_item_cell_text_and_bbox_iou50": {
+        "matched": 0,
+        "predicted": 0,
+        "gold": 547,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "complete_line_item_row_text": {
+        "matched": 0,
+        "predicted": 0,
+        "gold": 142,
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  "timing": {
+    "generation_seconds_sum": 9181.565507059995,
+    "median_seconds": 117.83511872100007,
+    "p95_nearest_rank_seconds": 435.7715750369998,
+    "peak_allocated_gpu_bytes": 2539125248
+  },
+  "note": "One frozen adapter test; partial eight-category OCR baseline. Base-model comparison is validation-only."
+}

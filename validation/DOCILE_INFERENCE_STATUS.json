@@ -1,0 +1,43 @@
+{
+  "new_cpu_metric_prompt_checks_passed": 4,
+  "prior_pytest_suite_passed": 21,
+  "cli_help_verified": true,
+  "gpu_generation_executed_by_builder": false,
+  "paired_user_inference_results_available": true,
+  "heldout_extraction_accuracy_established": false,
+  "readable_recipe_cpu_checks_passed": 5,
+  "readable_recipe_gpu_memory_tested": false,
+  "readable_recipe_full_dataset_preflight_run_by_builder": false,
+  "user_reported_observations": {
+    "one_validation_page_three_field_probe": {
+      "low_resolution": [
+        384,
+        288
+      ],
+      "high_resolution": [
+        1280,
+        992
+      ],
+      "base_correct_values_low_high": [
+        0,
+        3
+      ],
+      "adapter_correct_values_low_high": [
+        0,
+        3
+      ],
+      "total_requested_values": 3
+    },
+    "full_schema_high_resolution_original_prompt": {
+      "base_output_tokens": 4096,
+      "adapter_output_tokens": 4096,
+      "both_schema_invalid": true
+    },
+    "full_schema_high_resolution_compact_prompt": {
+      "base_output_tokens": 3072,
+      "adapter_output_tokens": 3072,
+      "both_schema_invalid": true
+    },
+    "scope": "Owner-supplied logs; one validation document; no general accuracy claim."
+  }
+}

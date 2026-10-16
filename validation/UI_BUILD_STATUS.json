@@ -1,0 +1,10 @@
+{
+  "ui_version": 2,
+  "javascript_syntax": "passed",
+  "dom_interaction_assertions_passed": 17,
+  "html_unique_ids": "passed",
+  "browser_visual_qa": "not available; not performed",
+  "impeccable": "published skill guidance applied; context launcher failed because engine unavailable",
+  "backend_source_changed": false,
+  "python_tests_passed": 13
+}
